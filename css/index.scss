@@ -1,0 +1,1434 @@
+@mixin tablet-768{
+    @media(max-width:768px){
+        @content;
+}
+    }
+@mixin mobile-576{
+    @media(max-width:576px){
+        @content;
+    }
+}
+
+$main_color: #756320;
+$h2_color:rgb(129, 112, 72);
+
+
+    // @import url('https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&display=swap');
+
+*{
+    box-sizing: border-box;
+    // font-family: 'ZCOOL QingKe HuangYou', cursive, 'Courier New', Courier, monospace;
+}
+body{
+    width: 100%;
+    // background-color: #ece9de;
+    background: url(../assets/bg.png);
+    transition: 3s;
+}
+body.perfume_P_bg{
+    background-color: #ffd9f0;
+}
+body.perfume_G_bg{
+    background-color: #aef29f;
+}
+body.perfume_Y_bg{
+    background-color: #ffe055;
+}
+body.perfume_W_bg{
+    background-color: #ece9de;
+}
+section {
+    position: relative;
+    max-width: 1280px;
+    margin: 0 auto 150px auto;
+    padding: 50px 50px 50px 50px;
+    @include tablet-768{
+        width: 100%;
+    }
+}
+
+.links {
+    color: rgb(72, 71, 70);
+    text-decoration: none;
+}
+
+h2{ 
+    // background-color: $main_color;
+    color: $h2_color;
+    font-weight: 800;
+    font-size: 30px;
+    position: relative;
+    margin-bottom: 20px;
+    &::after{
+        content: "";
+        position: absolute;
+        top: -25%;
+        left: -30px;
+        height: 150%;
+        width: 8px;
+        background-color: $h2_color;
+    }
+}
+p,li{
+    color: rgb(72, 70, 70);
+    font-size: 18px;
+    line-height: 30px;
+}
+.accent-color{
+    color: rgb(129, 112, 72);
+    font-size: 24px;
+}
+//按鈕
+.button{
+    width: 300px;
+    margin: 0 auto;
+
+    .fill_button{
+        border: 1px solid $main_color;
+        box-shadow: 2px 2px 5px $main_color;
+        color: rgb(72, 71, 70);
+        font-size: 18px;
+        line-height: 25px;
+        margin: 0px 25px;
+        padding: 15px 50px;
+        text-decoration: none;
+        text-align: center;
+        position: relative;
+    } 
+    /* 去掉奇怪的預設顏色 */
+    .fill_button:visited {
+        color: #000;
+    }
+    
+    .fill_button:hover {
+        border: 1px solid $main_color;
+        color: #fff;
+    }
+    
+    .fill_button::after {
+        content: "";
+        width: 100%;
+        height: 100%;
+        background-color: $main_color;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        transform: scaleX(0);
+        transform-origin: 0% 0%;
+        transition:.3s cubic-bezier(0.095, 0.715, 0.340, 0.930);
+    }
+    .fill_button:hover::after{
+        transform: scaleX(1);
+    }
+}
+
+//漢堡
+.menu_btn{
+    z-index: 99;
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // background-color: $main_color;
+    // border-radius: 50%;
+    // border: 6px solid rgb(75, 75, 75);
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    
+
+    &::before{
+        content: "";
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background-color: $main_color;
+        top:-90%;
+        right: -100%;
+        transition: 0.3s ease-in-out;
+        @include tablet-768{
+            background-color:#75632000;
+        }
+    }
+
+    // 三條線
+    .burger_center, .burger_top, .burger_bottom{
+        position: relative;
+        width: 50%;
+        height: 3px;
+        border-radius: 3px;
+        background-color: rgba(240, 240, 240);
+        transition: 0.3s ease-in-out;
+        @include tablet-768{
+            background-color: $main_color;
+            height: 5px;
+        }
+    }
+    .burger_top{
+        position: absolute;
+        transform: translateY(-20px);
+    }
+    .burger_bottom{
+        position: absolute;
+        transform: translateY(20px);
+    }
+}
+// 按下去後的變形
+.menu_btn.active{
+    .burger_center{
+        transform: scaleX(0);
+        @include tablet-768{
+            background-color: rgba(240, 240, 240);
+        }
+    }
+    .burger_top{
+        transform: translateY(0) rotate(225deg);
+        @include tablet-768{
+            background-color: rgba(240, 240, 240);
+        }
+    }
+    .burger_bottom{
+        transform: translateY(0) rotate(-45deg);
+        @include tablet-768{
+            background-color: rgba(240, 240, 240);
+        }
+    }
+}
+
+// 選單
+.nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: fixed;
+    padding: 100px 20px 20px 20px;
+    width: 100px;
+    border: 1px rgba(218, 218, 218, 0.171) solid;
+    top: 0;
+    right: 0;
+    z-index: 11;
+    backdrop-filter: blur(5px);
+    background-color: $main_color;
+    transition: 0.5s ease-in-out;
+    transform: translateY(-110%);
+    @include tablet-768{
+        width: 100%;
+        height: 100vh;
+        transition: 0.3s ease-in-out;
+        background-color: $main_color;
+        opacity: 0;
+    }
+    &::after{
+        content: "";
+        position: relative;
+        bottom: -70px;
+        order: 2;
+        width: 0px;
+        height: 0px;
+        border-style: solid;
+        border-width: 0px 50px 50px 50px;
+        border-color: $main_color $main_color transparent $main_color;
+
+        @include tablet-768{
+            display: none;
+        }
+    }
+
+    a{  
+        order: 1;
+        @include tablet-768{
+            order: -1;
+        }  
+        img{
+            height: 60px;
+            @include tablet-768{
+            height: 100px;
+            }
+        }
+        
+    }
+    ul {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+        align-items: center;
+        @include tablet-768{
+            
+        }        
+        li{
+            // display: none;
+            writing-mode: vertical-lr;
+            letter-spacing: 5px;
+            position: relative;
+            list-style: none;
+            margin: 20px;
+            color: rgba(240, 240, 240, 0.7);
+            font-size: 20px;
+            cursor: pointer;
+            &:hover{
+                color: #fff;
+            }
+            &::after{
+                content: "";
+                position: absolute;
+                width: 100%;
+                height: 1px;
+                background-color: #fff;
+                bottom: -5px;
+                left: 0;
+                transition:.5s cubic-bezier(0.095, 0.715, 0.340, 0.930);
+                transform: scaleX(0) 
+            }
+            &:hover::after{
+                position: absolute;
+                transform: scaleX(1);
+            }
+            @include tablet-768{
+                writing-mode: horizontal-tb;
+                font-size: 36px;
+                line-height: 36px;
+            }
+            a{
+                color: #fff;
+                text-decoration: none;
+            }
+        }
+    }
+    .icons{
+        display: none;
+        @include tablet-768{
+        display: flex;    
+        } 
+        a{  display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 10px 2px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: rgba(240, 240, 240, 0.7);
+            &:hover{
+                background-color: #fff;
+            }
+            img {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    }
+}
+//點了漢堡之後
+.nav.active {
+    transform:translateY(0%);
+    @include tablet-768{
+    opacity: 1;
+    }
+}
+
+
+// 首圖
+header {
+    max-width: 1920px;
+    position: relative;
+    margin: 0 auto 150px auto;
+    #carouselContainer{
+        width: 100%;
+        height: 100vh;
+        background-color: #999;
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        #carouselControls{
+            font-size: 50px;
+            color: #fff;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 10px;
+            right: 10px;
+            margin: auto;
+            display: flex;
+            justify-content:space-between; 
+            align-items: center;
+            z-index: 1;
+            > div{
+                cursor: pointer; 
+            }
+        }
+        #carouselIndexs{
+            position: absolute;
+            bottom: 100px;
+            left: 0;
+            right: 0;
+            margin: auto; 
+            display: flex;
+            justify-content: center;
+            z-index: 1;
+            li{
+                background-color: rgb(255, 255, 255);
+                // width: 15px;
+                // height: 15px;
+                // border-radius: 50%;
+                width: 60px;
+                height: 5px;
+                border-radius: 30px;
+                margin: 10px;
+                cursor: pointer;
+            }
+            li.active{
+                position: relative;
+            }
+            li.active::after{
+                content: '';
+                position: absolute;
+                height: 100%;
+                top: 0;
+                left: 0;
+                border-radius: 30px;
+                background-color: rgb(114, 114, 114);
+                animation: carouselIndexBar 7s linear;
+                @keyframes carouselIndexBar {
+                    0% {width: 0%}
+                    100% {width: 100%}
+                }
+            }
+        }
+        #carousel{
+            /* 如果增加#carousel .item 這邊的width要調整(數量*100%); */
+            width: 600%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            position: relative;
+            right: 0%;
+            .item{
+                flex: 1 0 auto;
+                height: 100%;
+                color: #fff;
+                font-size: 100px;
+                text-align: center;
+                overflow: hidden;
+            }
+            div:nth-child(1){
+                background: url(../images/hero1.jpg) rgb(225, 195, 182) 53% 60% / cover;
+            }
+            div:nth-child(2){
+                background: url(../images/hero2.jpg) rgb(225, 195, 182) 50% 50% / cover;
+            }
+            div:nth-child(3){
+                background-color: #222; 
+                position: relative;
+                video{
+                    width: 100%;
+                    // height: 100%;
+                    position: absolute;
+                    top:0;
+                    bottom: 0;
+                    left:0;
+                    right: 0;
+                    margin: auto;
+                }
+            }
+            div:nth-child(4){
+                background: url(../images/hero4.jpg) rgb(225, 195, 182) 50% 50% / cover;
+            }
+            div:nth-child(5){
+                background: url(../images/hero5.jpg) rgb(225, 195, 182) 20% 50% / cover;
+            }
+            div:nth-child(6){
+                background: url(../images/hero6.jpg) rgb(225, 195, 182) 50% 50% / cover;
+            }
+
+        }
+    }
+    .logo{
+        img{
+            width: 40%;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            z-index: 10;
+            // opacity: 0.5;
+            // mix-blend-mode:hard-light;
+            @include tablet-768{
+                width: 70%;
+                bottom: 60%
+            }
+        }
+    }
+    .scroll_down{
+        position: absolute;
+        color:#fff;
+        font-size: 22px;
+        left: 50%;
+        bottom: 50px;
+        transform: translateX(-50%);
+        animation: scroll_down_breath 5s infinite ease-in-out;
+        &::before,
+        &::after{
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 10px;
+            border-color: #ffffff transparent transparent transparent;
+            transition: 1s;
+            animation: scroll_down .8s infinite linear;
+        }
+        &::after{
+            top: 100%;
+            animation-delay: .4s;
+        }
+        @keyframes scroll_down {
+            0%{opacity: 0;}
+            25%{opacity: 1;}
+            50%{opacity: 1;}
+            75%{opacity: 1;}
+            100%{opacity: 0; top:200%}
+        }
+        @keyframes scroll_down_breath {
+            0%{opacity: 0.1;}
+            25%{opacity: 1;}
+            50%{opacity: 1;}
+            75%{opacity: 1;}
+            100%{opacity: 0.1}
+        }
+    }
+}
+
+// 真的漢堡
+.section1 {
+    // background-color:rgb(175, 180, 187);
+    >.item{
+        display: flex;
+        align-items: center;
+        @include tablet-768{
+            flex-direction: column;
+        }
+        img{
+            width: 30%;
+            display: block;
+            margin: 50px auto;
+            @include tablet-768{
+                width: 50%;
+            }
+        }
+    }
+    // .burgers{
+    //     position: relative;
+    //     display: flex;
+    //     justify-content:space-evenly;
+    //     margin-bottom: 100px;
+    //     @include tablet-768{
+    //         margin: 0 0 50px 0;
+    //     }
+    //     div{  
+    //         width: 45%;
+    //         background-color: $main_color;
+    //         font-size: 0;
+    //         overflow: hidden;
+    //         &:hover img{
+    //             transform: scale(1.1);
+    //         }
+    //         img{
+    //             width: 100%;
+    //             object-fit: cover;
+    //             object-position: center center;
+    //             transition: 1s;
+    //         }
+    //         &:last-child::before{
+    //             content: "?";
+    //             text-align: center;
+    //             position: absolute;
+    //             top: 50%;
+    //             left: 50%;
+    //             transform: translate(-50%,-50%);
+    //             color: #fdfdfdb0;
+    //             font-size: 10vw;
+    //             font-weight: 900;
+    //             width: 15%;
+    //             height: 30%;
+    //             border-radius: 50%;
+    //             box-shadow: 5px 5px 10px#141414;
+    //             z-index: 1;
+    //             background-color: $main_color;
+    //         }
+    //     }
+    // }
+
+    .beforeAfter{
+        width: 100%;
+        // width: 100vw;
+        // height: 100vw;
+        overflow: hidden;
+        position: relative;
+        img{
+            width: 100%;
+            // object-fit: cover;
+            // object-fit: contain;
+            // height: 100%;
+            // display: none;
+            // object-position: center;
+        }
+        .after{
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            clip-path: polygon(50% 0, 0 0, 0 100%, 50% 100%);
+            z-index: 1;
+            // clip-path: inset(0 0 0 1%);
+            div{
+                position: absolute;
+                top: 30px;
+                left: 30px;
+                font-size: 100px;
+                color: white;
+            }
+        }
+        .before{
+            div{
+                // display: none;
+                position: absolute;
+                top: 30px;
+                right: 30px;
+                font-size: 100px;
+                color: white;
+            }
+        }
+        .line{
+            pointer-events: none;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%,0);
+            height: 100%;
+            width: 4px;
+            background-color: white;
+            z-index: 2;
+            // @include tablet-768{
+            //     pointer-events: auto;
+            // }
+            // z-index: 100;
+            .circle{
+                // pointer-events: none;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+                width: 80px;
+                height: 80px;
+                // background-color: white;
+                border: 4px solid white;
+                border-radius: 50%;
+                // z-index: 10;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                i{
+                    color: white;
+                    font-size: 30px;
+                    // font-weight: 400;
+                    animation: aniCircle 2s infinite;
+                }
+                @keyframes aniCircle {
+                    0% {transform: translateX(0px)}
+                    25% {transform: translateX(-5px)}
+                    50% {transform: translateX(0px)}
+                    75% {transform: translateX(5px)}
+                    100% {transform: translateX(0px)}
+                }
+            }
+        }
+    }
+}
+
+// 鬆餅
+.section2{
+    // background-color:#e7ac93;
+    display: flex;
+    height: auto;
+    @include tablet-768{
+        flex-direction: column;
+        margin-bottom: 100px;
+    }        
+    .pancake{
+        overflow: hidden;
+        width: 50%;
+        position: relative;
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        & img:nth-child(1){
+            /* 底圖 */
+            width: 100%;
+            z-index: 1;
+            position: relative !important;
+        }
+        & img:nth-child(2){
+            /* 奶油 */
+            width: 100%;
+            top:-5%;
+            z-index: 4;
+        }
+        & img:nth-child(3){
+            /* 鬆餅 */
+            width: 100%;
+            z-index: 3;
+        }
+        #blueBerry1{
+            /* 左邊單顆藍莓 */
+            width: 26%;
+            left: 10%;
+            top: 20%;
+            z-index: 3;
+            filter:blur(1px);
+        }
+        & img:nth-child(5){
+            /* 右邊比較近的藍莓 */
+            width: 35%;
+            left: 60%;
+            top: 50%;
+            z-index: 5;
+            filter:blur(1px);
+        }
+        & img:nth-child(6){
+            /* 一堆藍莓 */
+            width: 26%;
+            left: 50%;
+            top: 40%;
+            z-index: 2;
+        }
+        & img:nth-child(7){
+            /* 叉子 */
+            width: 26%;
+            left: 0%;
+            top: 50%;
+            z-index: 4;
+            filter:blur(1px);
+        }
+        @include tablet-768{
+            width: 100%;
+            align-self: center;
+        }        
+    }
+    .text{
+        width: 50%;
+        padding-left: 50px;
+        @include tablet-768{
+            width: 100%;
+            order: -1;
+            padding: 0 0 50px 50px;
+        }      
+    }
+}
+
+// 香水
+.section3 {
+    // max-width: 1600px;
+
+    background-color:#ece9de;
+    transition: 3s;
+    display: flex;
+    @include tablet-768{
+        flex-direction:column;
+        position: relative;
+    }        
+    @include mobile-576{
+        flex-direction:column;
+        position: relative;
+    }
+    .text{
+        width: 40%;
+        @include tablet-768{
+            position: sticky;
+            backdrop-filter:blur(3px);
+            top: 80px;
+            width: 100%;
+        }
+        @include mobile-576{
+            position: sticky;
+            top: 150px;
+            width: 100%;
+        }
+        .page1{
+            height: 100vh;
+            padding-left: 50px;
+            // background-color:rgb(222, 205, 181);
+            position: sticky;
+            top: 300px;
+            @include tablet-768{
+                height: auto;
+                background-color: rgba(238, 226, 216, 0.5);       
+            }
+            @include mobile-576{
+                padding: 0px;
+            }
+            li{
+                position: relative;
+                text-indent: -1em;
+                line-height: 50px;
+                font-size: 18px;
+            }
+        }
+    }
+    .perfume{
+        width: 60%;
+        @include tablet-768{
+            width: 100%;
+        }
+        @include mobile-576{
+            width: 100%;
+        }
+        .perfume_P{
+            height: 110vh;
+            background: url(../images/photography-74.jpg) no-repeat fixed  74% 50%/42%;
+            @include tablet-768{
+                background: url(../images/photography-74.jpg)  no-repeat fixed 50% 55% / 90%;
+            }
+            @include mobile-576{
+                background: url(../images/photography-74.jpg)  no-repeat fixed 50% 55% / 90%;
+            }
+        }
+        .perfume_G{
+            height: 110vh;
+            background: url(../images/photography-75.jpg)  no-repeat fixed 74% 50%/42%;
+            @include tablet-768{
+                background: url(../images/photography-75.jpg)  no-repeat fixed 50% 55% / 90%;
+            }
+            @include mobile-576{
+                background: url(../images/photography-75.jpg)  no-repeat fixed 50% 55% / 90%;
+            }
+        }
+        .perfume_Y{
+            height: 110vh;
+            background: url(../images/photography-76.jpg) no-repeat fixed 74% 50%/42%;
+            @include tablet-768{
+                background: url(../images/photography-76.jpg) no-repeat fixed 50% 55% / 90%;
+            }
+            @include mobile-576{
+                background: url(../images/photography-76.jpg) no-repeat fixed 50% 55% / 90%;
+            }
+        }
+        .perfume_W{
+            height: 110vh;
+            background: url(../images/photography-77.jpg) no-repeat fixed 74% 50%/42%;
+            @include tablet-768{
+                background: url(../images/photography-77.jpg) no-repeat fixed 50% 55% / 90%;
+            }
+            @include mobile-576{
+                background: url(../images/photography-77.jpg) no-repeat fixed 50% 55% / 90%;
+            }
+        }
+        
+    }
+}
+
+.section3.perfume_P_bg{
+    background-color: #ffd9f07e;
+}
+.section3.perfume_G_bg{
+    background-color: #aef29f83;
+}
+.section3.perfume_Y_bg{
+    background-color: #ffe05586;
+}
+.section3.perfume_W_bg{
+    background-color: #ece9de;
+}
+// 作品集
+.section4 {
+    max-width: 100%;
+    padding-top: 0px;
+    padding-bottom: 100px;
+    background-color:#dfdad5;
+    position: relative;
+    .wave_bg{
+        width: 100%;
+        height: 102px;
+        background: url(../images/wave_bg.png) repeat-x;
+        position: absolute;
+        top: -100px;
+        left: 0;
+    }
+    h2 {
+        color: $main_color;
+        font-size: 100px;
+        writing-mode: vertical-lr;
+        top: 150px;
+        z-index: 1;
+        &::after{
+            content: "";
+            position: absolute;
+            top: -0;
+            left: -15px;
+            height: 100%;
+            width: 8px;
+            background-color: $main_color;
+        }
+        @include mobile-576{
+            font-size: 70px;
+            top: 0px;
+            width: auto;
+        }
+    }
+    .item{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: 300px;
+        position: relative;
+        @include tablet-768{
+            flex-direction: column;
+        }
+        .image{
+            display: flex;
+            width: 70%;
+            position: relative;
+            // &::after{
+            //     content: "";
+            //     position: absolute;
+            //     width: 50%;
+            //     height: 100%;
+            //     right: 0;
+            //     left: 60%;
+            //     top: 0;
+            //     margin: auto;
+            //     border: 3px solid $main_color;
+            //     @include tablet-768{
+            //         border: 1px solid $main_color;
+            //     }
+            // }
+            img{
+                width: 40%;
+                object-fit: contain;
+            }
+        }
+        #photography1{
+            transform: translate(90%, 74%);
+            z-index: 1;
+            transition: 3s;
+        }
+        #photography2{
+            transform: rotate(10deg) translate(24%, 68%);
+            transition: 3s;
+        }
+        #photography3{
+            transform: rotate(-10deg) translate(-129%, 58%);
+            transition: 3s;
+        }
+
+        #photography1.move{
+            transform: translate(126%, -7%);
+            z-index: 1;
+        }
+        #photography2.move{
+            transform: rotate(19deg) translate(90%, -3%);
+        }
+        #photography3.move{
+            transform: rotate(-23deg) translate(-140%, -25%);
+        }
+
+        .text{
+            z-index: 1;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -200px;
+            margin: auto;
+            width: 70%;
+            font-size: 50px;
+            background-color: rgba(238, 226, 216, 0.5);
+            backdrop-filter:blur(5px);
+            &::after{
+                content: "";
+                position: absolute;
+                top: 0;
+                left: -10px;
+                height: 100%;
+                width: 8px;
+                background-color: $main_color;
+            }
+            @include tablet-768{
+                width: 200px;
+
+            }
+            @include mobile-576{
+                width: 200px;
+            }
+        }
+    }
+    .P2{
+        .image{
+            width: 70%;
+            @include tablet-768{
+                width: 70%;
+            }
+            @include mobile-576{
+                width: 70%;
+            }
+            img{
+                width: 60%;
+                object-fit: contain;
+                border: #fff 10px solid;
+                @include tablet-768{
+                    width: 60%;
+                    border: #fff 7px solid;
+                }
+                @include mobile-576{
+                    width: 60%;
+                    border: #fff 4px solid;
+                }
+            }
+        }
+        #personalwork1{
+            transform: translate(59%, 155%) ;
+            transition: 3s;
+            z-index: 1;
+        }
+        #personalwork2{
+            transform: rotate(5deg) translate(-14%, 142%);
+            transition: 3s;
+        }
+        #personalwork3{
+            transform: rotate(-11deg) translate(-150%, 109%);
+            transition: 3s;
+        
+        }
+        #personalwork1.move{
+            transform: translate(69%, -6%);
+            z-index: 1;
+        }
+        #personalwork2.move{
+            transform: rotate(16deg) translate(19%, 47%);
+        }
+        #personalwork3.move{
+            transform: rotate(-18deg) translate(-172%, -18%);
+        }
+
+
+        .text{
+            bottom: -300px;
+
+            @include tablet-768{
+                // : translateY(150%);
+            }
+        }
+    }
+}
+
+// 拍攝計畫
+.section5 {
+    // background-color:rgb(217, 192, 191);
+    .pricelist{
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        .plan{
+            position:relative;
+            display: flex;
+            flex-direction: column;
+            width: 33%;
+            margin: 10px auto 50px auto;
+            @include tablet-768{
+                width: 100%;
+            }
+            .guide{
+                text-align: center;
+                font-size: 16px;
+                line-height: 60px;
+                width: 120px;
+                height: 60px;
+                background-color: #c40d2e;
+                color: #fff;
+                position: absolute;
+                right: 0;
+                margin: 0 auto;
+                top:-60px;
+                border-radius: 50%;
+                &::before{
+                    content: "";
+                    position: absolute;
+                    left: 7px;
+                    top: 38px;
+                    width: 0;
+                    height: 0;
+                    border-style: solid;
+                    border-width: 17px 0 0 59px;
+                    border-color: transparent transparent transparent #c40d2e;
+                }
+            }
+            h3{
+                height: 50px;
+                span{
+                    color: #fff;
+                    width: 50px;
+                    height: 50px;
+                    font-size: 32px;
+                    background-color: $main_color;
+                    border-radius: 50%;
+                }
+            }
+            .item{
+                display: flex;
+                flex-wrap: wrap;
+                background-color:#75632028;
+                border-radius: 30px;
+                margin-bottom: 10px;
+                img{
+                    width: calc(50% - 10px);
+                    margin: 5px;
+                    font-size: 0;
+                    border-radius: 30px;
+                }
+            }
+            .price{
+                background-color:$main_color;
+                border-radius: 30px;
+                margin: 0 auto;
+                padding: 10px 20px;
+                color: #fff;
+                font-size: 20px;
+            }
+        }
+    }
+}
+
+// 拍攝流程
+.section6 {
+    background-color:rgb(222, 205, 181);
+    border-radius: 50px;
+
+    .warp{
+        display: flex;
+        justify-content:space-evenly;
+        align-items: center;
+        background: linear-gradient(116deg, $main_color, rgb(219, 207, 189));
+        background-clip: text;
+        flex-wrap: wrap;
+
+        .step{
+            width: 30%;
+            margin: 10px;
+            @include tablet-768{
+                width: 40%;
+            }
+            @include mobile-576{
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 20px;
+            }
+            .title{
+                h3{
+                    font-size: 35px;
+                    font-weight: 900;
+                    line-height: 60px;
+                    color: transparent;
+                    @include mobile-576{
+                        font-size: 20px;
+                    }
+                }
+                p{
+                    text-align: center;
+                    font-size: 50px;
+                    font-weight: 900;
+                    color: transparent;
+                    @include mobile-576{
+                        font-size: 25px;
+                    }
+                }
+                @include mobile-576{
+                    width: 40%;
+                }
+            }
+            .pack{
+                margin-top: 5px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: rgb(240, 233, 226);
+                border-radius: 22% 13% 48% 37% / 12% 54% 21% 21%;
+                animation: borderradius 10s infinite alternate-reverse;
+                .illus{
+                    // height: 100%;
+                    width: 50%;
+                    @include mobile-576{
+                        width: 40%;
+                    }
+                    img{
+                        width: 100%;
+                        // background-color: RGB(239, 230, 212);
+                        // border-radius: 50px;
+                    }
+                }
+                .text{
+                    width: 50%;
+                    padding-left: 5px;
+                    @include mobile-576{
+                        width: 60%;
+                    }
+                    p{
+                        font-size: 24px;
+                        font-weight: 800;
+                        @include mobile-576{
+                            font-size: 15px;
+                        }
+                    }
+                }
+                @include mobile-576{
+                    width: 60%;
+                }
+
+                @keyframes borderradius {
+                0%{border-radius:22% 13% 48% 37% / 12% 54% 21% 21% ;}
+                25%{border-radius:46% 54% 59% 27% / 36% 72% 25% 70% ;}
+                50%{border-radius:14% 73% 54% 34% / 34% 25% 50% 54% ;}
+                100%{border-radius:11% 52% 44% 14% / 41% 23% 42% 42% ;}
+                }    
+            }            
+        }
+    & :nth-child(2) :nth-child(2){animation: borderradius 20s 2s infinite alternate; @include mobile-576{ order: -1; }}
+    & :nth-child(3) :nth-child(2){animation: borderradius 10s .5s infinite alternate-reverse;}
+    & :nth-child(4) :nth-child(2){animation: borderradius 15s 1s infinite alternate; @include mobile-576{ order: -1; }}
+    & :nth-child(5) :nth-child(2){animation: borderradius 10s 2s infinite alternate-reverse;}
+    }
+}
+
+// QA
+.section7 {
+    .classificationNav{
+        display: flex;
+        // justify-items: center;
+        // align-content: center;
+        li{
+            flex: 1;
+            height: 50px;
+            font-weight: 800;
+            text-align: center;
+            // margin: 5px;
+            line-height: 50px;
+            border-bottom: 1px solid #999;
+            position: relative;
+            cursor: pointer;
+            
+        }
+        li.active{
+            border-bottom: 3px solid $main_color;
+        }
+        
+    }
+    .classification{
+        ul{
+            margin: 40px 0 20px 0;
+            .Q{
+                font-size: 16px;
+                margin: 10px 0 10px 0;
+                color: #756320;
+                cursor: pointer;
+            }
+            .A{
+                font-size: 18px;
+                padding-left: 14px;
+            }
+        }
+        
+    }
+}
+// 聯絡我
+footer {
+    overflow: hidden;
+    padding: 50px 0;
+    h2{
+        margin-left: 200px;
+    }
+    .letter{
+        position:relative;
+        height: 300px;
+        img {
+            position: absolute;
+            object-fit: contain;
+            margin: auto;
+        }
+        #sun {
+            width: 15%;
+            height: 15%;
+            top: 0;
+            right: 5%;
+            animation: sun 40s infinite linear;
+        }
+        #cloud1a{
+            width: 30%;
+            height: 30%;
+            bottom: 50px;
+            right: 0;
+            animation: cloud1a 20s infinite linear;
+        }
+        #cloud1b{
+            width: 30%;
+            height: 30%;
+            bottom: 50px;
+            right: -100%;
+            animation: cloud1b 20s infinite linear;
+        }
+        #cloud2a{
+            width: 15%;
+            height: 15%;
+            bottom: 50%;
+            right: 0;
+            animation: cloud2a 50s infinite linear;
+        }
+        #cloud2b{
+            width: 15%;
+            height: 15%;
+            bottom: 50%;
+            right: -100%;
+            animation: cloud2b 50s infinite linear;
+            animation-delay: 0s;
+        }
+        #bird{
+            width: 30%;
+            height: 30%;
+            top: 5%;
+            left: 5%;
+            animation: bird 2s infinite alternate;
+        }
+    }
+    @keyframes cloud1a {
+        0%{right: 0;}
+        100%{right: 100%;} 
+    }
+    @keyframes cloud1b {
+        0%{right: -100%;}
+        100%{right: 0%;} 
+    }
+    @keyframes cloud2a {
+        0%{right: 0;}
+        100%{right: 100%;} 
+    }
+    @keyframes cloud2b {
+        0%{right: -100%;}
+        100%{right: 0%;} 
+    }
+    @keyframes bird {
+        0%{top:5%}
+        100%{top:15%;} 
+    }
+    @keyframes sun {
+        0%{transform: rotate(0deg);}
+        100%{transform: rotate(360deg);}
+    }
+    p {
+        text-align: center;
+    }    
+    form { 
+        display: flex;
+        flex-direction: column;
+        // align-items:flex-end;
+        margin: 0 auto 50px auto;
+        width: 80%;
+        @include tablet-768{
+            width: 90%;
+        }
+        div {
+            display: flex;
+            input {
+                background-color:#ffffff;
+                height: 40px;
+                width: 100%;
+                margin: 10px;
+                padding: 10px;
+                border: none;
+
+                &:focus{
+                    outline: 2px solid $main_color;
+                }
+                @include tablet-768{
+                    width: 100%;
+                }
+            }
+            textarea {
+                width: 100%;
+                border: none;
+                margin: 10px;
+                padding: 10px;
+                resize : none;
+                &:focus{
+                    outline: 2px solid $main_color;
+                }      
+            }
+        }
+        .submit{
+            input{
+                width: 100%;
+                background-color:$main_color;
+                color: #fff;
+                font-weight: 800;
+            }
+        }
+        .type{
+            display: flex;
+            @include tablet-768{
+                width: 96%;
+                display: flex;
+                flex-direction: column;
+            }
+            .typecontent{
+                margin: 10px;
+                padding: 10px;
+                height: 40px;
+                background-color: #fff;
+                display: flex;
+                width: 100%;
+                font-size: 10px;
+                align-items: center;
+                color: #757575;
+                @include tablet-768{
+                    width: 100%;
+                    display: flex;
+                }
+                input{
+                    width: 20px;
+                    &:focus{
+                        outline: none;
+                    }
+                }
+            }
+        }
+        & .info1 :nth-child(1){
+            flex:1
+        }
+        & .info1 :nth-child(2){
+            flex:1
+        }
+        & .info1 :nth-child(3){
+            flex:2
+        }
+    }
+    .icons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 5px;
+        img {
+            width: 40px;
+        }
+        
+    }
+}
